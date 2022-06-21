@@ -25,9 +25,9 @@ ENV = os.getenv('DJANGO_ENV')
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY') if ENV == 'prod' else config('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = ENV == 'prod'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
