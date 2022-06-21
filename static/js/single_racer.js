@@ -62,12 +62,13 @@ const getCharsToDelete = (promptText) => {
 
 const decreaseIfBackspace = ({ key, ctrlKey }) => {
     if (key !== 'Backspace') return
-
+    
     const textToWrite = document.querySelector('.text-to-write');
     const wrong = document.querySelector('.text-wrong');
     const written = document.querySelector('.text-written');
     const prompt = document.getElementById('prompt');
-
+    
+    if (!prompt.value) return;
     const n = ctrlKey ? getCharsToDelete(prompt.value) : 1;
 
     for (let i = 0; i < n; i++) {
