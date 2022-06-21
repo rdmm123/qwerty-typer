@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Sigle Player{% endblock title %}
+
+{% block content %}
+<header class="game-menu">
+  <button onclick="history.back()" class="menu-button">Go Back</button>
+  <button id="reset_text" class="menu-button">Reset</button>
+</header>
+<section class="main">
+  <div class="text-div">
+    <span class="text-written"></span><span class="text-wrong"></span
+    ><span id="text-to-write" class="text-to-write"></span>
+  </div>
+  <input
+    type="text"
+    name="prompt"
+    id="prompt"
+    class="prompt"
+    onblur="this.focus()"
+    autofocus
+  />
+</section>
+{% endblock content %} {% block js %}
+<script src="{% static 'js/single_racer.js' %}"></script>
+{% endblock js %}
