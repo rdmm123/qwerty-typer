@@ -14,7 +14,7 @@ body {
     margin: auto;
     width: 70%;
     max-width: 800px;
-    height: 95vh;
+    height: 94vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,6 +37,7 @@ body {
     border-bottom: 2px solid grey;
     font-size: 25px;
     background: none;
+    caret-color: transparent;
 }
 
 .text-wrong {
@@ -90,4 +91,16 @@ body {
 .main-menu a:hover {
     color: white;
     text-decoration: underline;
+}
+
+.counter-div {
+    color: gray;
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.counter-div div {
+    margin: 0px 20px;
 }

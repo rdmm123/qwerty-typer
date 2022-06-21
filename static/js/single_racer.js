@@ -1,4 +1,4 @@
-const getText = async (lang='english') => {
+const getText = async (lang='spanish') => {
     const url = '/api/generate?' + new URLSearchParams({lang});
     let resp = await fetch(url);
     resp = await resp.json();
@@ -46,9 +46,18 @@ const addKeyToWrong = ({ keyCode, key }) => {
     }
 }
 
-// TODO: mejorar esto
-const keyIsLetter = ({ keyCode, key}) => {
-    return String.fromCharCode(keyCode).match(/(\w|\s|'|")/g) || key === "'" || key === '"';
+const keyIsLetter = ({ key}) => key.length === 1;
+
+const getCharsToDelete = (promptText) => {
+    let spaceCounter = 0;
+    for (let i = promptText.length - 1; i >= 0; i--) {
+        const c = promptText.charAt(i);
+        if (c !== ' ') break;
+        spaceCounter++;
+    }
+    const promptWords = promptText.match(/[\w-']+|[^\w\s]+/g);
+    const purgedWords = promptWords !== null ? promptWords.filter(word => word.length > 0) : [];
+    return purgedWords.length > 0 ? purgedWords[purgedWords.length - 1].length + spaceCounter : spaceCounter;
 }
 
 const decreaseIfBackspace = ({ key, ctrlKey }) => {
@@ -59,8 +68,7 @@ const decreaseIfBackspace = ({ key, ctrlKey }) => {
     const written = document.querySelector('.text-written');
     const prompt = document.getElementById('prompt');
 
-    const n = ctrlKey ? prompt.value.length : 1;
-    console.log(n);
+    const n = ctrlKey ? getCharsToDelete(prompt.value) : 1;
 
     for (let i = 0; i < n; i++) {
         const text = textToWrite.innerText;
@@ -93,6 +101,7 @@ const setNewText = async () => {
         prompt.disabled = false;
         resetButton.disabled = false;
         prompt.focus();
+        timer.start();
     }
 }
 
@@ -101,10 +110,21 @@ const resetText = () => {
     document.querySelector('.text-wrong').innerHTML = '';
     document.querySelector('.text-to-write').innerHTML = '';
     document.getElementById('prompt').value = '';
+    timer.stop();
     setNewText();
 }
 
+const updateCounter = () => {
+    document.getElementById('seconds').innerHTML = String(timer.getTimeValues().seconds).padStart(2, '0');
+    document.getElementById('minutes').innerHTML = String(timer.getTimeValues().minutes).padStart(2, '0');
+    const cpm = charCount / (timer.getTotalTimeValues().seconds / 60);
+    document.getElementById('cpm').innerHTML = cpm.toFixed(1);
+    document.getElementById('wpm').innerHTML = (cpm / 5).toFixed(1);
+}
+
 let charCount;
+const timer = new easytimer.Timer();
+timer.addEventListener('secondsUpdated', updateCounter)
 setNewText();
 document.getElementById('prompt').addEventListener('keydown', (event) => checkInput(event));
 document.getElementById('reset_text').addEventListener('click', resetText);

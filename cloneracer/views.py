@@ -19,6 +19,7 @@ def generate_text(request):
         max_tokens=100
     )
     text = response['choices'][0]['text']
+    text = text.strip().split('\n')[0]
     return JsonResponse({'text': text})
 
 class HomePageView(TemplateView):
