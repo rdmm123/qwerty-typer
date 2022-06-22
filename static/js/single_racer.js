@@ -91,10 +91,11 @@ const setNewText = async () => {
     charCount = 0;
     const prompt = document.getElementById('prompt');
     const resetButton = document.getElementById('reset_text');
+    const langSelect = document.getElementById('lang_select');
     prompt.disabled = true;
     resetButton.disabled = true;
     try {
-        const generatedText = await getText();
+        const generatedText = await getText(localStorage.getItem('lang') ?? langSelect.value);
         document.getElementById('text-to-write').innerText = generatedText.trim();
     } catch (err) {
         throw err;
@@ -127,5 +128,10 @@ let charCount;
 const timer = new easytimer.Timer();
 timer.addEventListener('secondsUpdated', updateCounter)
 setNewText();
+document.getElementById('lang_select').value = localStorage.getItem('lang') ?? 'english';
 document.getElementById('prompt').addEventListener('keydown', (event) => checkInput(event));
 document.getElementById('reset_text').addEventListener('click', resetText);
+document.getElementById('lang_select').addEventListener('change', () => {
+    localStorage.setItem('lang', document.getElementById('lang_select').value);
+    resetText();
+});

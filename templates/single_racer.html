@@ -4,8 +4,16 @@
 
 {% block content %}
 <header class="game-menu">
-  <button onclick="history.back()" class="menu-button">Go Back</button>
-  <button id="reset_text" class="menu-button">Reset</button>
+  <div class="left">
+    <button onclick="history.back()" class="menu-button menu-icon"><i class="fa-solid fa-arrow-left"></i></button>
+  </div>
+  <div class="right">
+    <select name="lang_select" id="lang_select" class="lang-select">
+      <option value="english">English</option>
+      <option value="spanish">Español</option>
+    </select>
+    <button id="reset_text" class="menu-icon menu-button"><i class="fa-solid fa-arrows-rotate"></i></button>
+  </div>
 </header>
 <section class="main">
   <div class="counter-div">

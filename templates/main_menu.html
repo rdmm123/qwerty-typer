@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="main-menu">
-  <nav>
-    <a href="{% url 'single_racer' %}">Solo</a>
-    <a href="#">Versus</a>
-  </nav>
-</section>
+<div class="menu-div">
+  <section class="main-menu">
+    <nav>
+      <a href="{% url 'single_racer' %}">Solo</a>
+      <a href="#">Versus</a>
+    </nav>
+  </section>
+  <footer class="bottom-menu">
+    <a href="https://github.com/rdmm123/qwerty-typer" target="_blank" class="menu-button menu-icon">
+      <i class="fa-brands fa-github"></i>
+    </a>
+  </footer>
+</div>
 {% endblock %}

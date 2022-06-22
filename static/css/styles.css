@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -14,7 +15,7 @@ body {
     margin: auto;
     width: 70%;
     max-width: 800px;
-    height: 94vh;
+    height: 92vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,27 +53,37 @@ body {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.menu-icon {
+    margin: 15px;
+    border: none;
+    color: grey;
+    font-size: 20px;
+    background: none;
 }
 
 .menu-button {
-    margin: 10px;
-    border: none;
-    color: grey;
-    font-size: 18px;
-    background: none;
     cursor: pointer;
 }
 
 .menu-button:hover {
-    text-decoration: underline;
+    color: white;
+}
+
+.menu-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
 }
 
 .main-menu {
-    height: 100vh;
+    flex: 1 1 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .main-menu nav {
@@ -93,6 +104,13 @@ body {
     text-decoration: underline;
 }
 
+.bottom-menu {
+    flex: 0 1 auto;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
 .counter-div {
     color: gray;
     width: 100%;
@@ -103,4 +121,17 @@ body {
 
 .counter-div div {
     margin: 0px 20px;
+}
+
+.lang-select {
+    outline: none;
+    border:none;
+    background: none;
+    color: grey;
+    font-size: 16px;
+}
+
+.lang-select option {
+    background-color: rgb(43, 43, 43);
+    color: grey;
 }
